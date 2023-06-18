@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_contas")
+@Table(name = "tb_contascud")
 public class ContaCud implements Serializable, Comparable<ContaCud>  {
 
     @Id

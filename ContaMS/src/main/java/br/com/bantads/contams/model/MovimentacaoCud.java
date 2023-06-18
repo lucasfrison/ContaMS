@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_movimentacoes")
+@Table(name = "tb_movimentacoescud")
 public class MovimentacaoCud implements Serializable, Comparable<MovimentacaoCud> {
 
 	@Id

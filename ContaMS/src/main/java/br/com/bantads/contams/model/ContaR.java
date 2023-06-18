@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_contas")
+@Table(name = "tb_contasr")
 public class ContaR implements Serializable, Comparable<ContaR> {
     
     @Id
