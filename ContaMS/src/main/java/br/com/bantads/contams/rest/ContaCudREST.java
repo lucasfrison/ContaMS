@@ -1,12 +1,17 @@
 package br.com.bantads.contams.rest;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,9 +41,14 @@ public class ContaCudREST {
         }
     }
     
-	@GetMapping("/")
-	public String index() {
-		return "Greetings from Spring Boot!";
-	}
+    @PutMapping("/conta")
+    public ResponseEntity<ContaCudDTO> alterarConta(@RequestBody ContaCudDTO conta) {
+    	throw new UnsupportedOperationException();
+    }
+
+    @DeleteMapping("/conta/{id}")
+    public ResponseEntity<ContaCudDTO> removerConta(@PathVariable("id") int id) {
+    	throw new UnsupportedOperationException();
+    }
 	
 }

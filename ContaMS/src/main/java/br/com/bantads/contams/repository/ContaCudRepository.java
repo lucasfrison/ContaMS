@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.bantads.contams.model.ContaCud;
 
-public interface ContaCudRepository extends JpaRepository<ContaCud, UUID> {
+public interface ContaCudRepository extends JpaRepository<ContaCud, Integer> {
 	
 	public ContaCud findByNumero(String numero);
 	
