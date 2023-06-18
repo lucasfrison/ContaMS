@@ -12,13 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+/*
 @Entity
 @Table(name = "tb_contasr")
 public class ContaR implements Serializable, Comparable<ContaR> {
@@ -32,7 +26,7 @@ public class ContaR implements Serializable, Comparable<ContaR> {
     @Column(name="id_gerente")
 	private Integer gerenteId;
     @Column(name="numero_conta")
-    private Double numero;
+    private String numero;
     @Column(name="saldo_conta")
     private Double saldo;
     @Column(name="limite_conta")
@@ -40,7 +34,7 @@ public class ContaR implements Serializable, Comparable<ContaR> {
     @Column(name="criacao_conta")
     private Date dataCriacao;
     @OneToMany(mappedBy = "origem")
-    private List<MovimentacaoRDTO> movimentacoes;
+    private List<MovimentacaoR> movimentacoes;
     
 	
 	@Override
@@ -48,4 +42,4 @@ public class ContaR implements Serializable, Comparable<ContaR> {
 		return 0;
 	}
 
-}
+}*/

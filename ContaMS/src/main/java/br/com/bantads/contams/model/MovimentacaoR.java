@@ -12,13 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+/*
 @Entity
 @Table(name = "tb_movimentacoesr")
 public class MovimentacaoR implements Serializable, Comparable<MovimentacaoR> {
@@ -35,12 +30,8 @@ public class MovimentacaoR implements Serializable, Comparable<MovimentacaoR> {
 	@Column(name="valor_mov")
 	private Double valor;
 	@Column(name="id_origem")
-	@ManyToOne
-    @JoinColumn(name = "id_conta")
 	private ContaR origem;
 	@Column(name="id_destino")
-	@ManyToOne
-    @JoinColumn(name = "id_conta")
 	private ContaR destino;
 
 	@Override
@@ -49,4 +40,4 @@ public class MovimentacaoR implements Serializable, Comparable<MovimentacaoR> {
 		return 0;
 	}
 
-}
+}*/

@@ -1,5 +1,6 @@
 plugins {
 	id 'java'
+	id 'eclipse'
 	id 'org.springframework.boot' version '3.1.0'
 	id 'io.spring.dependency-management' version '1.1.0'
 }
@@ -19,16 +20,20 @@ configurations {
 
 repositories {
 	mavenCentral()
+	flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
+	implementation name: 'modelmapper-3.0.0'
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.amqp:spring-rabbit-test'
+	implementation 'org.postgresql:postgresql'
+	implementation 'javax.xml.bind:jaxb-api:2.2.4'
 }
 
 tasks.named('test') {

@@ -8,5 +8,6 @@ import br.com.bantads.contams.model.ContaCud;
 
 public interface ContaCudRepository extends JpaRepository<ContaCud, UUID> {
 	
+	public ContaCud findByNumero(String numero);
 	
 }

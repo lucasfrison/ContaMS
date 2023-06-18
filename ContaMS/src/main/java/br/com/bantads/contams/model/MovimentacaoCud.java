@@ -11,13 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "tb_movimentacoescud")
 public class MovimentacaoCud implements Serializable, Comparable<MovimentacaoCud> {
@@ -32,14 +26,12 @@ public class MovimentacaoCud implements Serializable, Comparable<MovimentacaoCud
 	private TipoMovimentacao tipo;
 	@Column(name="valor_mov")
 	private Double valor;
-	@Column(name="id_origem")
 	@ManyToOne
-    @JoinColumn(name = "id_conta")
-	private ContaR origem;
-	@Column(name="id_destino")
+	@JoinColumn(name = "id_origem")
+	private ContaCud origem;
 	@ManyToOne
-    @JoinColumn(name = "id_conta")
-	private ContaR destino;
+	@JoinColumn(name = "id_destino")
+	private ContaCud destino;
 
 	@Override
 	public int compareTo(MovimentacaoCud o) {
