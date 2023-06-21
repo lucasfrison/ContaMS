@@ -13,7 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-/*
+
 @Entity
 @Table(name = "tb_movimentacoesr")
 public class MovimentacaoR implements Serializable, Comparable<MovimentacaoR> {
@@ -29,10 +29,12 @@ public class MovimentacaoR implements Serializable, Comparable<MovimentacaoR> {
 	private TipoMovimentacao tipo;
 	@Column(name="valor_mov")
 	private Double valor;
-	@Column(name="id_origem")
-	private ContaR origem;
-	@Column(name="id_destino")
-	private ContaR destino;
+	@ManyToOne
+	@JoinColumn(name = "id_origem")
+	private ContaCud origem;
+	@ManyToOne
+	@JoinColumn(name = "id_destino")
+	private ContaCud destino;
 
 	@Override
 	public int compareTo(MovimentacaoR o) {
@@ -40,4 +42,69 @@ public class MovimentacaoR implements Serializable, Comparable<MovimentacaoR> {
 		return 0;
 	}
 
-}*/
+	public MovimentacaoR(Integer id, Date data, TipoMovimentacao tipo, Double valor, ContaCud origem,
+			ContaCud destino) {
+		super();
+		this.id = id;
+		this.data = data;
+		this.tipo = tipo;
+		this.valor = valor;
+		this.origem = origem;
+		this.destino = destino;
+	}
+
+	public MovimentacaoR() {
+		super();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public TipoMovimentacao getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoMovimentacao tipo) {
+		this.tipo = tipo;
+	}
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
+
+	public ContaCud getOrigem() {
+		return origem;
+	}
+
+	public void setOrigem(ContaCud origem) {
+		this.origem = origem;
+	}
+
+	public ContaCud getDestino() {
+		return destino;
+	}
+
+	public void setDestino(ContaCud destino) {
+		this.destino = destino;
+	}
+
+	
+	
+}

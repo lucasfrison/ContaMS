@@ -39,5 +39,70 @@ public class MovimentacaoCud implements Serializable, Comparable<MovimentacaoCud
 		return 0;
 	}
 
+	public MovimentacaoCud(Integer id, Date data, TipoMovimentacao tipo, Double valor, ContaCud origem,
+			ContaCud destino) {
+		super();
+		this.id = id;
+		this.data = data;
+		this.tipo = tipo;
+		this.valor = valor;
+		this.origem = origem;
+		this.destino = destino;
+	}
+
+	public MovimentacaoCud() {
+		super();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public TipoMovimentacao getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoMovimentacao tipo) {
+		this.tipo = tipo;
+	}
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
+
+	public ContaCud getOrigem() {
+		return origem;
+	}
+
+	public void setOrigem(ContaCud origem) {
+		this.origem = origem;
+	}
+
+	public ContaCud getDestino() {
+		return destino;
+	}
+
+	public void setDestino(ContaCud destino) {
+		this.destino = destino;
+	}
+	
+	
+
 	
 }

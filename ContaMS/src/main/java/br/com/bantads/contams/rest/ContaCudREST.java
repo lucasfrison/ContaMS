@@ -17,14 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bantads.contams.dto.ContaCudDTO;
 import br.com.bantads.contams.model.ContaCud;
+import br.com.bantads.contams.model.ContaR;
 import br.com.bantads.contams.repository.ContaCudRepository;
+import br.com.bantads.contams.repository.ContaRRepository;
 
 @CrossOrigin
 @RestController
 public class ContaCudREST {
 
     @Autowired
-    private ContaCudRepository contaRepository;
+    private ContaCudRepository contaCudRepository;
+    @Autowired
+    private ContaRRepository contaRRepository;
     @Autowired
     private ModelMapper mapper;
     @Autowired
@@ -32,9 +36,9 @@ public class ContaCudREST {
     
     @PostMapping("/conta")
     public ResponseEntity<ContaCudDTO> inserirConta(@RequestBody ContaCudDTO conta) {
-        if (contaRepository.findByNumero(conta.getNumero()) == null) {
-            contaRepository.save(mapper.map(conta, ContaCud.class));
-            ContaCud contaNova = contaRepository.findByNumero(conta.getNumero());
+        if (contaRRepository.findByNumero(conta.getNumero()) == null) {
+            contaCudRepository.save(mapper.map(conta, ContaCud.class));
+            ContaR contaNova = contaRRepository.findByNumero(conta.getNumero());
             return ResponseEntity.status(201).body(mapper.map(contaNova, ContaCudDTO.class));
         } else {
             return ResponseEntity.status(400).build();
@@ -43,12 +47,23 @@ public class ContaCudREST {
     
     @PutMapping("/conta")
     public ResponseEntity<ContaCudDTO> alterarConta(@RequestBody ContaCudDTO conta) {
-    	throw new UnsupportedOperationException();
+        if (contaRRepository.findById(conta.getId()) != null) {
+            contaCudRepository.save(mapper.map(conta, ContaCud.class));
+            ContaR contaNova = contaRRepository.findByNumero(conta.getNumero());
+            return ResponseEntity.status(201).body(mapper.map(contaNova, ContaCudDTO.class));
+        } else {
+            return ResponseEntity.status(400).build();
+        }
     }
 
     @DeleteMapping("/conta/{id}")
     public ResponseEntity<ContaCudDTO> removerConta(@PathVariable("id") int id) {
-    	throw new UnsupportedOperationException();
+        if (contaRRepository.findById(id) != null) {
+            contaCudRepository.deleteById(id);
+            return ResponseEntity.status(204).build();
+        } else {
+            return ResponseEntity.status(400).build();
+        }
     }
 	
 }

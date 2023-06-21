@@ -8,6 +8,6 @@ import br.com.bantads.contams.model.ContaCud;
 
 public interface ContaCudRepository extends JpaRepository<ContaCud, Integer> {
 	
-	public ContaCud findByNumero(String numero);
+
 	
 }
