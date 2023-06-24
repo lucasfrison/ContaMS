@@ -19,6 +19,9 @@ import br.com.bantads.contams.dto.ContaCudDTO;
 import br.com.bantads.contams.dto.ContaRDTO;
 import br.com.bantads.contams.model.ContaCud;
 import br.com.bantads.contams.model.ContaR;
+import br.com.bantads.contams.rabbitmq.ContaCudProducer;
+import br.com.bantads.contams.rabbitmq.ContaTransfer;
+import br.com.bantads.contams.rabbitmq.RabbitMQConfig;
 import br.com.bantads.contams.repository.command.ContaCudRepository;
 import br.com.bantads.contams.repository.read.ContaRRepository;
 
@@ -34,11 +37,14 @@ public class ContaCudREST {
     private ModelMapper mapper;
     @Autowired
     private RabbitTemplate rabbitTemplate;
+    @Autowired
+    private ContaCudProducer producer;
     
     @PostMapping("/conta")
     public ResponseEntity<ContaRDTO> inserirConta(@RequestBody ContaCudDTO conta) {
         if (contaRRepository.findByNumero(conta.getNumero()) == null) {
             contaCudRepository.save(mapper.map(conta, ContaCud.class));
+            producer.send(new ContaTransfer(mapper.map(conta, ContaCud.class), "inserir", "conta-inserida"));
             ContaR contaNova = contaRRepository.findByNumero(conta.getNumero());
             return ResponseEntity.status(201).body(mapper.map(contaNova, ContaRDTO.class));
         } else {

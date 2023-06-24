@@ -2,20 +2,25 @@ package br.com.bantads.contams.rabbitmq;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 @Component
+@ComponentScan("br.com.bantads.contams.rabbitmq")
 public class ContaCudProducer {
 
-    private final RabbitTemplate rabbitTemplate;
+    @Autowired
+    private RabbitTemplate template;
 
     @Autowired
-    public ContaCudProducer(RabbitTemplate rabbitTemplate) {
-        this.rabbitTemplate = rabbitTemplate;
-    }
+    @Qualifier("conta")
+    private org.springframework.amqp.core.Queue queue;
 
-    public void sendMessage(String message) {
-        rabbitTemplate.convertAndSend("fila-conta", message);
+    public void send(ContaTransfer contaTransfer) {
+        this.template.convertAndSend(contaTransfer);
+        System.out.println("Mensagem enviada: " + contaTransfer.getMessage());
     }
-	
+    
 }
