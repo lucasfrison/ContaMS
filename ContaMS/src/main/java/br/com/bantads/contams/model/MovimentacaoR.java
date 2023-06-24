@@ -31,10 +31,10 @@ public class MovimentacaoR implements Serializable, Comparable<MovimentacaoR> {
 	private Double valor;
 	@ManyToOne
 	@JoinColumn(name = "id_origem")
-	private ContaCud origem;
+	private ContaR origem;
 	@ManyToOne
 	@JoinColumn(name = "id_destino")
-	private ContaCud destino;
+	private ContaR destino;
 
 	@Override
 	public int compareTo(MovimentacaoR o) {
@@ -42,8 +42,8 @@ public class MovimentacaoR implements Serializable, Comparable<MovimentacaoR> {
 		return 0;
 	}
 
-	public MovimentacaoR(Integer id, Date data, TipoMovimentacao tipo, Double valor, ContaCud origem,
-			ContaCud destino) {
+	public MovimentacaoR(Integer id, Date data, TipoMovimentacao tipo, Double valor, ContaR origem,
+			ContaR destino) {
 		super();
 		this.id = id;
 		this.data = data;
@@ -89,19 +89,19 @@ public class MovimentacaoR implements Serializable, Comparable<MovimentacaoR> {
 		this.valor = valor;
 	}
 
-	public ContaCud getOrigem() {
+	public ContaR getOrigem() {
 		return origem;
 	}
 
-	public void setOrigem(ContaCud origem) {
+	public void setOrigem(ContaR origem) {
 		this.origem = origem;
 	}
 
-	public ContaCud getDestino() {
+	public ContaR getDestino() {
 		return destino;
 	}
 
-	public void setDestino(ContaCud destino) {
+	public void setDestino(ContaR destino) {
 		this.destino = destino;
 	}
 

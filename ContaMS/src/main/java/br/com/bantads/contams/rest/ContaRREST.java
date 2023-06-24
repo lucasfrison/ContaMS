@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.bantads.contams.dto.ContaCudDTO;
 import br.com.bantads.contams.dto.ContaRDTO;
 import br.com.bantads.contams.model.ContaR;
-import br.com.bantads.contams.repository.ContaRRepository;
+import br.com.bantads.contams.repository.read.ContaRRepository;
 
 @CrossOrigin
 @RestController

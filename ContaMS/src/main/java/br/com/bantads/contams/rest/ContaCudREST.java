@@ -16,10 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bantads.contams.dto.ContaCudDTO;
+import br.com.bantads.contams.dto.ContaRDTO;
 import br.com.bantads.contams.model.ContaCud;
 import br.com.bantads.contams.model.ContaR;
-import br.com.bantads.contams.repository.ContaCudRepository;
-import br.com.bantads.contams.repository.ContaRRepository;
+import br.com.bantads.contams.repository.command.ContaCudRepository;
+import br.com.bantads.contams.repository.read.ContaRRepository;
 
 @CrossOrigin
 @RestController
@@ -35,32 +36,33 @@ public class ContaCudREST {
     private RabbitTemplate rabbitTemplate;
     
     @PostMapping("/conta")
-    public ResponseEntity<ContaCudDTO> inserirConta(@RequestBody ContaCudDTO conta) {
+    public ResponseEntity<ContaRDTO> inserirConta(@RequestBody ContaCudDTO conta) {
         if (contaRRepository.findByNumero(conta.getNumero()) == null) {
             contaCudRepository.save(mapper.map(conta, ContaCud.class));
             ContaR contaNova = contaRRepository.findByNumero(conta.getNumero());
-            return ResponseEntity.status(201).body(mapper.map(contaNova, ContaCudDTO.class));
+            return ResponseEntity.status(201).body(mapper.map(contaNova, ContaRDTO.class));
         } else {
             return ResponseEntity.status(400).build();
         }
     }
     
     @PutMapping("/conta")
-    public ResponseEntity<ContaCudDTO> alterarConta(@RequestBody ContaCudDTO conta) {
+    public ResponseEntity<ContaRDTO> alterarConta(@RequestBody ContaCudDTO conta) {
         if (contaRRepository.findById(conta.getId()) != null) {
             contaCudRepository.save(mapper.map(conta, ContaCud.class));
             ContaR contaNova = contaRRepository.findByNumero(conta.getNumero());
-            return ResponseEntity.status(201).body(mapper.map(contaNova, ContaCudDTO.class));
+            return ResponseEntity.status(201).body(mapper.map(contaNova, ContaRDTO.class));
         } else {
             return ResponseEntity.status(400).build();
         }
     }
 
     @DeleteMapping("/conta/{id}")
-    public ResponseEntity<ContaCudDTO> removerConta(@PathVariable("id") int id) {
+    public ResponseEntity<ContaRDTO> removerConta(@PathVariable("id") int id) {
         if (contaRRepository.findById(id) != null) {
             contaCudRepository.deleteById(id);
-            return ResponseEntity.status(204).build();
+            ContaR contaRemovida = contaRRepository.findById(id);
+            return ResponseEntity.status(204).body(mapper.map(contaRemovida, ContaRDTO.class));
         } else {
             return ResponseEntity.status(400).build();
         }
