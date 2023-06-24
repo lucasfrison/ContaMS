@@ -15,15 +15,16 @@ public class ContaCudProducer {
     private RabbitTemplate template;
     @Autowired
     private ContaRConsumer aReceiver;
+    
+    private final String routingKey = "conta";
 
     @Autowired
     @Qualifier("conta")
     private org.springframework.amqp.core.Queue queue;
 
     public void send(ContaTransfer contaTransfer) {
-        this.template.convertAndSend(contaTransfer);
+        this.template.convertAndSend(routingKey, contaTransfer);
         System.out.println("Mensagem enviada: " + contaTransfer.getMessage());
-        aReceiver.receiveMessage(contaTransfer);
     }
     
 }

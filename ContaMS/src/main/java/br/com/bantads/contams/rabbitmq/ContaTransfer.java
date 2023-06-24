@@ -9,7 +9,6 @@ import br.com.bantads.contams.model.ContaR;
 import br.com.bantads.contams.model.ContaR;
 
 public class ContaTransfer implements Serializable {
-    ContaRDTO contaDto;
     ContaR contaR;
     String action;
     String message;
@@ -28,12 +27,12 @@ public class ContaTransfer implements Serializable {
         this.message = message;
     }
 
-    public ContaRDTO getContaDto() {
-        return this.contaDto;
+    public ContaR getContaDto() {
+        return this.contaR;
     }
 
-    public void setContaDto(ContaRDTO contaDto) {
-        this.contaDto = contaDto;
+    public void setContaDto(ContaR contaDto) {
+        this.contaR = contaDto;
     }
 
     public String getAction() {

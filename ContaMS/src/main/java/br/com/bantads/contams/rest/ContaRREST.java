@@ -39,9 +39,8 @@ public class ContaRREST {
     }
     
     @GetMapping("/conta")
-    public ResponseEntity<List<ContaRDTO>> buscarTodasAsContas(@PathVariable("id") int id) {
+    public ResponseEntity<List<ContaRDTO>> buscarTodasAsContas() {
         List<ContaR> lista = contaRepository.findAll();
-        Collections.sort(lista);
         return ResponseEntity.ok().body(lista.stream().map(g -> mapper.map(g, ContaRDTO.class)).collect(Collectors.toList()));
     }
 

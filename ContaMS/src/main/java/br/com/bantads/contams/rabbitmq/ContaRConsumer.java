@@ -38,7 +38,7 @@ public class ContaRConsumer {
 				break;
 			}
 			case "buscar-todos": {
-				contaRepository.getAll();
+				contaRepository.findAll();
 				break;
 			}
 		}

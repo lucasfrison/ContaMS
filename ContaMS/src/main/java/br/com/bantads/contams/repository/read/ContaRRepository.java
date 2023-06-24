@@ -12,6 +12,5 @@ public interface ContaRRepository extends JpaRepository<ContaR, Integer> {
 	public ContaR findByNumero(String numero);
 	public ContaR findById(int id);
 	public void save(ContaCud conta);
-	public List<ContaR> getAll();
 	
 }

@@ -47,7 +47,7 @@ public class ContaCudREST {
             contaCudRepository.save(mapper.map(conta, ContaCud.class));
             aSender.send(new ContaTransfer(mapper.map(conta, ContaR.class), "inserir", "conta-inserida"));
             ContaR contaNova = contaRRepository.findByNumero(conta.getNumero());
-            return ResponseEntity.status(201).body(mapper.map(contaNova, ContaRDTO.class));
+            return ResponseEntity.status(201).build();
         } else {
             return ResponseEntity.status(400).build();
         }
@@ -59,7 +59,7 @@ public class ContaCudREST {
             contaCudRepository.save(mapper.map(conta, ContaCud.class));
             aSender.send(new ContaTransfer(mapper.map(conta, ContaR.class), "atualizar", "conta-atualizada"));
             ContaR contaNova = contaRRepository.findByNumero(conta.getNumero());
-            return ResponseEntity.status(201).body(mapper.map(contaNova, ContaRDTO.class));
+            return ResponseEntity.status(201).build();
         } else {
             return ResponseEntity.status(400).build();
         }
@@ -72,7 +72,7 @@ public class ContaCudREST {
             contaCudRepository.deleteById(id);
             aSender.send(new ContaTransfer(mapper.map(conta, ContaR.class), "remover", "conta-removida"));
             ContaR contaRemovida = contaRRepository.findById(id);
-            return ResponseEntity.status(204).body(mapper.map(contaRemovida, ContaRDTO.class));
+            return ResponseEntity.status(204).build();
         } else {
             return ResponseEntity.status(400).build();
         }
