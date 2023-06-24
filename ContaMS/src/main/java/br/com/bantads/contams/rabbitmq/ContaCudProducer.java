@@ -13,6 +13,8 @@ public class ContaCudProducer {
 
     @Autowired
     private RabbitTemplate template;
+    @Autowired
+    private ContaRConsumer aReceiver;
 
     @Autowired
     @Qualifier("conta")
@@ -21,6 +23,7 @@ public class ContaCudProducer {
     public void send(ContaTransfer contaTransfer) {
         this.template.convertAndSend(contaTransfer);
         System.out.println("Mensagem enviada: " + contaTransfer.getMessage());
+        aReceiver.receiveMessage(contaTransfer);
     }
     
 }

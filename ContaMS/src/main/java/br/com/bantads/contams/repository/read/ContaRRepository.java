@@ -1,5 +1,6 @@
 package br.com.bantads.contams.repository.read;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,5 +12,6 @@ public interface ContaRRepository extends JpaRepository<ContaR, Integer> {
 	public ContaR findByNumero(String numero);
 	public ContaR findById(int id);
 	public void save(ContaCud conta);
+	public List<ContaR> getAll();
 	
 }

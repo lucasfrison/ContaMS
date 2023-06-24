@@ -3,36 +3,36 @@ package br.com.bantads.contams.rabbitmq;
 
 import java.io.Serializable;
 
-import br.com.bantads.contams.dto.ContaCudDTO;
 import br.com.bantads.contams.dto.ContaRDTO;
-import br.com.bantads.contams.model.ContaCud;
+import br.com.bantads.contams.dto.ContaRDTO;
+import br.com.bantads.contams.model.ContaR;
 import br.com.bantads.contams.model.ContaR;
 
 public class ContaTransfer implements Serializable {
-    ContaCudDTO contaDto;
-    ContaCud contaCud;
+    ContaRDTO contaDto;
+    ContaR contaR;
     String action;
     String message;
 
     public ContaTransfer() {
     }
 
-    public ContaTransfer(ContaCud contaDto, String action) {
-        this.contaCud = contaDto;
+    public ContaTransfer(ContaR contaDto, String action) {
+        this.contaR = contaDto;
         this.action = action;
     }
     
-    public ContaTransfer(ContaCud contaDto, String action, String message) {
-        this.contaCud = contaDto;
+    public ContaTransfer(ContaR contaDto, String action, String message) {
+        this.contaR = contaDto;
         this.action = action;
         this.message = message;
     }
 
-    public ContaCudDTO getContaDto() {
+    public ContaRDTO getContaDto() {
         return this.contaDto;
     }
 
-    public void setContaDto(ContaCudDTO contaDto) {
+    public void setContaDto(ContaRDTO contaDto) {
         this.contaDto = contaDto;
     }
 
@@ -52,11 +52,11 @@ public class ContaTransfer implements Serializable {
         this.message = message;
     }
     
-    public ContaCud getContaCud() {
-		return contaCud;
+    public ContaR getContaR() {
+		return contaR;
 	}
     
-    public void setContaCud(ContaCud contaCud) {
-		this.contaCud = contaCud;
+    public void setContaR(ContaR ContaR) {
+		this.contaR = ContaR;
 	}
 }

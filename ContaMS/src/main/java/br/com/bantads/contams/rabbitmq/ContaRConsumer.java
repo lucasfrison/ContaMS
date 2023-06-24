@@ -19,9 +19,30 @@ public class ContaRConsumer {
     @RabbitListener(queues = "conta")
     public void receiveMessage(@Payload ContaTransfer contaTransfer) {
     	System.out.println(contaTransfer.getAction());
-        if (contaTransfer.getAction().equals("inserir")) {
-        	contaRepository.save(contaTransfer.getContaCud());
-        }
+    	String action = contaTransfer.getAction();
+    	switch (action) {
+			case "inserir": {
+				contaRepository.save(contaTransfer.getContaR());
+				break;
+			}
+			case "atualizar": {
+				contaRepository.save(contaTransfer.getContaR());
+				break;
+			}
+			case "remover": {
+				contaRepository.delete(contaTransfer.getContaR());
+				break;
+			}
+			case "buscar": {
+				contaRepository.findById(contaTransfer.getContaR().getId());
+				break;
+			}
+			case "buscar-todos": {
+				contaRepository.getAll();
+				break;
+			}
+		}
+        
     }
 		
 }

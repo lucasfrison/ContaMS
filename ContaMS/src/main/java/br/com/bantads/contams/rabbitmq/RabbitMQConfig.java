@@ -22,7 +22,16 @@ public class RabbitMQConfig {
     @Bean
     @Qualifier("conta")
     public Queue contaQueue() { return new Queue("conta"); }
+    
+    @Bean
+    public ContaRConsumer aReceiver() {
+        return new ContaRConsumer();
+    }
 
+    @Bean
+    public ContaCudProducer aSender() {
+        return new ContaCudProducer();
+    }
     
     @Bean
     public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {

@@ -20,6 +20,7 @@ import br.com.bantads.contams.dto.ContaRDTO;
 import br.com.bantads.contams.model.ContaCud;
 import br.com.bantads.contams.model.ContaR;
 import br.com.bantads.contams.rabbitmq.ContaCudProducer;
+import br.com.bantads.contams.rabbitmq.ContaRConsumer;
 import br.com.bantads.contams.rabbitmq.ContaTransfer;
 import br.com.bantads.contams.rabbitmq.RabbitMQConfig;
 import br.com.bantads.contams.repository.command.ContaCudRepository;
@@ -38,13 +39,13 @@ public class ContaCudREST {
     @Autowired
     private RabbitTemplate rabbitTemplate;
     @Autowired
-    private ContaCudProducer producer;
+    private ContaCudProducer aSender;
     
     @PostMapping("/conta")
     public ResponseEntity<ContaRDTO> inserirConta(@RequestBody ContaCudDTO conta) {
         if (contaRRepository.findByNumero(conta.getNumero()) == null) {
             contaCudRepository.save(mapper.map(conta, ContaCud.class));
-            producer.send(new ContaTransfer(mapper.map(conta, ContaCud.class), "inserir", "conta-inserida"));
+            aSender.send(new ContaTransfer(mapper.map(conta, ContaR.class), "inserir", "conta-inserida"));
             ContaR contaNova = contaRRepository.findByNumero(conta.getNumero());
             return ResponseEntity.status(201).body(mapper.map(contaNova, ContaRDTO.class));
         } else {
@@ -56,6 +57,7 @@ public class ContaCudREST {
     public ResponseEntity<ContaRDTO> alterarConta(@RequestBody ContaCudDTO conta) {
         if (contaRRepository.findById(conta.getId()) != null) {
             contaCudRepository.save(mapper.map(conta, ContaCud.class));
+            aSender.send(new ContaTransfer(mapper.map(conta, ContaR.class), "atualizar", "conta-atualizada"));
             ContaR contaNova = contaRRepository.findByNumero(conta.getNumero());
             return ResponseEntity.status(201).body(mapper.map(contaNova, ContaRDTO.class));
         } else {
@@ -65,8 +67,10 @@ public class ContaCudREST {
 
     @DeleteMapping("/conta/{id}")
     public ResponseEntity<ContaRDTO> removerConta(@PathVariable("id") int id) {
+    	ContaR conta = contaRRepository.findById(id);
         if (contaRRepository.findById(id) != null) {
             contaCudRepository.deleteById(id);
+            aSender.send(new ContaTransfer(mapper.map(conta, ContaR.class), "remover", "conta-removida"));
             ContaR contaRemovida = contaRRepository.findById(id);
             return ResponseEntity.status(204).body(mapper.map(contaRemovida, ContaRDTO.class));
         } else {
