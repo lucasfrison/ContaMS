@@ -3,35 +3,33 @@ package br.com.bantads.contams.rabbitmq;
 
 import java.io.Serializable;
 
-import br.com.bantads.contams.dto.ContaRDTO;
-import br.com.bantads.contams.dto.ContaRDTO;
-import br.com.bantads.contams.model.ContaR;
-import br.com.bantads.contams.model.ContaR;
+import br.com.bantads.contams.dto.ContaCudDTO;
+import br.com.bantads.contams.dto.ContaCudDTO;
 
 public class ContaTransfer implements Serializable {
-    ContaR contaR;
+    ContaCudDTO contaR;
     String action;
     String message;
 
     public ContaTransfer() {
     }
 
-    public ContaTransfer(ContaR contaDto, String action) {
+    public ContaTransfer(ContaCudDTO contaDto, String action) {
         this.contaR = contaDto;
         this.action = action;
     }
     
-    public ContaTransfer(ContaR contaDto, String action, String message) {
+    public ContaTransfer(ContaCudDTO contaDto, String action, String message) {
         this.contaR = contaDto;
         this.action = action;
         this.message = message;
     }
 
-    public ContaR getContaDto() {
+    public ContaCudDTO getContaDto() {
         return this.contaR;
     }
 
-    public void setContaDto(ContaR contaDto) {
+    public void setContaDto(ContaCudDTO contaDto) {
         this.contaR = contaDto;
     }
 
@@ -51,11 +49,11 @@ public class ContaTransfer implements Serializable {
         this.message = message;
     }
     
-    public ContaR getContaR() {
+    public ContaCudDTO getContaR() {
 		return contaR;
 	}
     
-    public void setContaR(ContaR ContaR) {
+    public void setContaR(ContaCudDTO ContaR) {
 		this.contaR = ContaR;
 	}
 }

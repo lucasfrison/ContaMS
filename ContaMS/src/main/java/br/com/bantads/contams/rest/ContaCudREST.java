@@ -45,7 +45,7 @@ public class ContaCudREST {
     public ResponseEntity<ContaRDTO> inserirConta(@RequestBody ContaCudDTO conta) {
         if (contaRRepository.findByNumero(conta.getNumero()) == null) {
             contaCudRepository.save(mapper.map(conta, ContaCud.class));
-            aSender.send(new ContaTransfer(mapper.map(conta, ContaR.class), "inserir", "conta-inserida"));
+            aSender.send(new ContaTransfer(conta, "inserir", "conta-inserida"));
             ContaR contaNova = contaRRepository.findByNumero(conta.getNumero());
             return ResponseEntity.status(201).build();
         } else {
@@ -57,7 +57,7 @@ public class ContaCudREST {
     public ResponseEntity<ContaRDTO> alterarConta(@RequestBody ContaCudDTO conta) {
         if (contaRRepository.findById(conta.getId()) != null) {
             contaCudRepository.save(mapper.map(conta, ContaCud.class));
-            aSender.send(new ContaTransfer(mapper.map(conta, ContaR.class), "atualizar", "conta-atualizada"));
+            aSender.send(new ContaTransfer(conta, "atualizar", "conta-atualizada"));
             ContaR contaNova = contaRRepository.findByNumero(conta.getNumero());
             return ResponseEntity.status(201).build();
         } else {
@@ -68,9 +68,17 @@ public class ContaCudREST {
     @DeleteMapping("/conta/{id}")
     public ResponseEntity<ContaRDTO> removerConta(@PathVariable("id") int id) {
     	ContaR conta = contaRRepository.findById(id);
+    	ContaCudDTO contaDto = new ContaCudDTO();
+    	contaDto.setClienteId(conta.getClienteId());
+    	contaDto.setDataCriacao(conta.getDataCriacao());
+    	contaDto.setGerenteId(conta.getGerenteId());
+    	contaDto.setId(conta.getId());
+    	contaDto.setLimite(conta.getLimite());
+    	contaDto.setNumero(conta.getNumero());
+    	contaDto.setSaldo(conta.getSaldo());
         if (contaRRepository.findById(id) != null) {
             contaCudRepository.deleteById(id);
-            aSender.send(new ContaTransfer(mapper.map(conta, ContaR.class), "remover", "conta-removida"));
+            aSender.send(new ContaTransfer(contaDto, "remover", "conta-removida"));
             ContaR contaRemovida = contaRRepository.findById(id);
             return ResponseEntity.status(204).build();
         } else {
