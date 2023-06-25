@@ -24,6 +24,10 @@ public class RabbitMQConfig {
     public Queue contaQueue() { return new Queue("CONTA"); }
     
     @Bean
+    @Qualifier("BD")
+    public Queue bdQueue() { return new Queue("BD"); }
+    
+    @Bean
     public ContaRConsumer aReceiver() {
         return new ContaRConsumer();
     }
@@ -37,6 +41,7 @@ public class RabbitMQConfig {
     public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
         RabbitAdmin rabbitAdmin = new RabbitAdmin(connectionFactory);
         rabbitAdmin.declareQueue(contaQueue()); // Declara a fila "conta"
+        rabbitAdmin.declareQueue(bdQueue());
         return rabbitAdmin;
     }
     

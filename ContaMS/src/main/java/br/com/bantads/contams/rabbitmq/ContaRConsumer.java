@@ -29,7 +29,7 @@ public class ContaRConsumer {
 	private ModelMapper mapper;
 	
 
-    @RabbitListener(queues = "CONTA")
+    @RabbitListener(queues = "BD")
     public void receiveMessage(@Payload ContaTransfer contaTransfer) {
     	System.out.println(contaTransfer.getAction());
     	List<MovimentacaoR> movimentacoes = new ArrayList<>();
