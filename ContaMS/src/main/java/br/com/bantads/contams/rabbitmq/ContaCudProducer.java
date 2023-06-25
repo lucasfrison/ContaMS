@@ -56,7 +56,7 @@ public class ContaCudProducer {
 	            );
 	            movimentacoes.add(movimentacao);
 	        }
-    	ContaRDTO novaConta = new ContaRDTO();
+    	ContaR novaConta = new ContaR();
     	novaConta.setId(contaDto.getId());
     	novaConta.setClienteId(contaDto.getClienteId());
     	novaConta.setGerenteId(contaDto.getGerenteId());
@@ -64,7 +64,7 @@ public class ContaCudProducer {
     	novaConta.setNumero(contaDto.getNumero());
     	novaConta.setSaldo(contaDto.getSaldo());
     	novaConta.setDataCriacao(contaDto.getDataCriacao());
-    	novaConta.setMovimentacoes(movimentacoes);
+    	novaConta.setMovimentacoes(message.getMovimentacoes());
     	this.template.convertAndSend(routingKey, objectMapper.writeValueAsString(message));
     }
     

@@ -59,7 +59,12 @@ public class ContaCudREST {
     
     @PutMapping("/conta")
     public ResponseEntity<ContaRDTO> alterarConta(@RequestBody ContaCudDTO conta) throws JsonProcessingException, AmqpException {
-        if (contaRRepository.findByNumero(conta.getNumero()) != null) {
+    	ContaR contaExistente = contaRRepository.findByNumero(conta.getNumero());
+    	if (contaExistente != null) {
+        	contaExistente.setClienteId(conta.getClienteId());
+            contaExistente.setGerenteId(conta.getGerenteId());
+            contaExistente.setSaldo(conta.getSaldo());
+            contaExistente.setLimite(conta.getLimite());
             contaCudRepository.save(mapper.map(conta, ContaCud.class));
             aSender.send(new ContaTransfer(conta, "atualizar", "conta-atualizada"));
             ContaR contaNova = contaRRepository.findByNumero(conta.getNumero());
