@@ -1,10 +1,11 @@
 package br.com.bantads.contams.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import br.com.bantads.contams.model.TipoMovimentacao;
 
-public class MovimentacaoRDTO {
+public class MovimentacaoRDTO implements Serializable {
 
 	private Integer id;
 	private Date data;

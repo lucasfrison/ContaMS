@@ -1,9 +1,10 @@
 package br.com.bantads.contams.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class ContaCudDTO {
+public class ContaCudDTO implements Serializable {
 	
 	private Integer id;
 	private Integer clienteId;
