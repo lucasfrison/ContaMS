@@ -16,10 +16,10 @@ public class ContaCudProducer {
     @Autowired
     private ContaRConsumer aReceiver;
     
-    private final String routingKey = "conta";
+    private final String routingKey = "CONTA";
 
     @Autowired
-    @Qualifier("conta")
+    @Qualifier("CONTA")
     private org.springframework.amqp.core.Queue queue;
 
     public void send(ContaTransfer contaTransfer) {

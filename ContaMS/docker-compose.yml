@@ -33,7 +33,7 @@ services:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq-conta'
     ports:
-      - 5674:5672
+      - 5672:5672
       - 15674:15672
     volumes:
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/

@@ -20,8 +20,8 @@ import ch.qos.logback.classic.pattern.MessageConverter;
 public class RabbitMQConfig {
 
     @Bean
-    @Qualifier("conta")
-    public Queue contaQueue() { return new Queue("conta"); }
+    @Qualifier("CONTA")
+    public Queue contaQueue() { return new Queue("CONTA"); }
     
     @Bean
     public ContaRConsumer aReceiver() {

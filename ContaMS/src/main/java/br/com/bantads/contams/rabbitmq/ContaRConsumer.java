@@ -16,7 +16,7 @@ public class ContaRConsumer {
 	private ContaRRepository contaRepository;
 	
 
-    @RabbitListener(queues = "conta")
+    @RabbitListener(queues = "CONTA")
     public void receiveMessage(@Payload ContaTransfer contaTransfer) {
     	System.out.println(contaTransfer.getAction());
     	String action = contaTransfer.getAction();
