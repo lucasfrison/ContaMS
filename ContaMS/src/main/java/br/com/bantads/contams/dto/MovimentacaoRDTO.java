@@ -10,8 +10,8 @@ public class MovimentacaoRDTO {
 	private Date data;
 	private TipoMovimentacao tipo;
 	private Double valor;
-	private ContaRDTO origem;
-	private ContaRDTO destino;
+	private Integer origemId;
+	private Integer destinoId;
 	
 	
 	
@@ -19,23 +19,23 @@ public class MovimentacaoRDTO {
 		super();
 	}
 	
-	public MovimentacaoRDTO(Date data, TipoMovimentacao tipo, Double valor, ContaRDTO origem, ContaRDTO destino) {
+	public MovimentacaoRDTO(Date data, TipoMovimentacao tipo, Double valor, Integer origem, Integer destino) {
 		super();
 		this.data = data;
 		this.tipo = tipo;
 		this.valor = valor;
-		this.origem = origem;
-		this.destino = destino;
+		this.origemId = origem;
+		this.destinoId = destino;
 	}
-	public MovimentacaoRDTO(Integer id, Date data, TipoMovimentacao tipo, Double valor, ContaRDTO origem,
-			ContaRDTO destino) {
+	public MovimentacaoRDTO(Integer id, Date data, TipoMovimentacao tipo, Double valor, Integer origem,
+			Integer destino) {
 		super();
 		this.id = id;
 		this.data = data;
 		this.tipo = tipo;
 		this.valor = valor;
-		this.origem = origem;
-		this.destino = destino;
+		this.origemId = origem;
+		this.destinoId = destino;
 	}
 	public Integer getId() {
 		return id;
@@ -61,17 +61,17 @@ public class MovimentacaoRDTO {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	public ContaRDTO getOrigem() {
-		return origem;
+	public Integer getOrigem() {
+		return origemId;
 	}
-	public void setOrigem(ContaRDTO origem) {
-		this.origem = origem;
+	public void setOrigem(Integer origem) {
+		this.origemId = origem;
 	}
-	public ContaRDTO getDestino() {
-		return destino;
+	public Integer getDestino() {
+		return destinoId;
 	}
-	public void setDestino(ContaRDTO destino) {
-		this.destino = destino;
+	public void setDestino(Integer destino) {
+		this.destinoId = destino;
 	}
 	
 	

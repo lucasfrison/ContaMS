@@ -10,11 +10,11 @@ public class MovimentacaoCudDTO {
 	private Date data;
 	private TipoMovimentacao tipo;
 	private Double valor;
-	private ContaRDTO origem;
-	private ContaRDTO destino;
+	private Integer origem;
+	private Integer destino;
 	
-	public MovimentacaoCudDTO(Integer id, Date data, TipoMovimentacao tipo, Double valor, ContaRDTO origem,
-			ContaRDTO destino) {
+	public MovimentacaoCudDTO(Integer id, Date data, TipoMovimentacao tipo, Double valor, Integer origem,
+			Integer destino) {
 		super();
 		this.id = id;
 		this.data = data;
@@ -26,7 +26,7 @@ public class MovimentacaoCudDTO {
 	
 	
 	
-	public MovimentacaoCudDTO(Date data, TipoMovimentacao tipo, Double valor, ContaRDTO origem, ContaRDTO destino) {
+	public MovimentacaoCudDTO(Date data, TipoMovimentacao tipo, Double valor, Integer origem, Integer destino) {
 		super();
 		this.data = data;
 		this.tipo = tipo;
@@ -67,16 +67,16 @@ public class MovimentacaoCudDTO {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	public ContaRDTO getOrigem() {
+	public Integer getOrigem() {
 		return origem;
 	}
-	public void setOrigem(ContaRDTO origem) {
+	public void setOrigem(Integer origem) {
 		this.origem = origem;
 	}
-	public ContaRDTO getDestino() {
+	public Integer getDestino() {
 		return destino;
 	}
-	public void setDestino(ContaRDTO destino) {
+	public void setDestino(Integer destino) {
 		this.destino = destino;
 	}
 	
