@@ -5,11 +5,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import aj.org.objectweb.asm.Type;
 import br.com.bantads.contams.dto.ContaCudDTO;
@@ -27,10 +30,12 @@ public class ContaRConsumer {
 	private ContaRRepository contaRepository;
 	@Autowired
 	private ModelMapper mapper;
+	@Autowired
+    private ContaCudProducer aSender;
 	
 
     @RabbitListener(queues = "BD")
-    public void receiveMessage(@Payload ContaTransfer contaTransfer) {
+    public void receiveMessage(@Payload ContaTransfer contaTransfer) throws JsonProcessingException, AmqpException {
     	System.out.println(contaTransfer.getAction());
     	List<MovimentacaoR> movimentacoes = new ArrayList<>();
     	ContaCudDTO contaDto = contaTransfer.getContaDto(); 
@@ -52,18 +57,22 @@ public class ContaRConsumer {
     	switch (action) {
 			case "inserir": {
 				contaRepository.save(novaConta);
+				//aSender.sendString(novaConta);
 				break;
 			}
 			case "atualizar": {
 				contaRepository.save(novaConta);
+				//aSender.sendString(novaConta);
 				break;
 			}
 			case "remover": {
 				contaRepository.delete(novaConta);
+				//aSender.sendString(novaConta);
 				break;
 			}
 			case "buscar": {
 				contaRepository.findById(contaTransfer.getContaR().getId());
+				//aSender.sendString(novaConta);
 				break;
 			}
 			case "buscar-todos": {
